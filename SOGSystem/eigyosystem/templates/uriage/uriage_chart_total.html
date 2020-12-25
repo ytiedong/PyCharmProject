@@ -1,0 +1,753 @@
+{% load i18n static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+
+    <title>営業管理システム</title>
+    <link rel="icon" href="{% static 'sales/images/logo.svg' %}">
+    <link rel="stylesheet" href="{% static 'sales/assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'sales/assets/css/Features-Blue.css' %}">
+    <link rel="stylesheet" href="{% static 'sales/assets/css/Footer-Dark.css' %}">
+    <link rel="stylesheet" href="{% static 'sales/assets/css/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'sales/assets/chart/dist/Chart.min.css' %}">
+</head>
+
+<body>
+    <div class="features-blue" style="padding-bottom: 22.5rem;">
+        <div class="container-fluid">
+            <div class="intro" style="margin-bottom: 0rem;height: 7%;">
+                <h1 class="display-4 text-center" style="color:black;margin: 0% 0% 0% 0%;margin-bottom: 2rem;padding: 3% 0% 0% 0%;font-size: 3.5rem;">売上管理</h1>
+            </div>
+            <ul class="nav nav-tabs" style="margin: 0% 0% 3% 0%;height: 3%;">
+                <li class="nav-item"><a class="nav-link" style="color:black;border-color:#007bff" href="{% url 'sales:index' %}">営業管理システム</a></li>
+                <li class="nav-item"><a class="nav-link" style="color:black;border-color:#007bff" href="{% url 'sales:index' %}">売上管理</a></li>
+                <li class="nav-item"><a class="nav-link active" style="color:black;background-color:#007bff;border-color:#ffffff" href="{% url 'sales:uriage' %}">グラフ表示</a></li>
+            </ul>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="box">
+                                <div class="box-body">1
+                                    <canvas id="canvas1"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="box" style="width:500px">
+                                <div class="box-body">2
+                                    <canvas id="canvas2"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="box">
+                                <div class="box-body">3
+                                    <canvas id="canvas3"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="box">
+                                <div class="box-body">4
+                                    <canvas id="canvas4"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box">
+                                <div class="box-body"style="color:black;font-size: 25px">5:
+                                    {% now "SHORT_DATETIME_FORMAT" %}
+                                    <h4>今月新規顧客登録：５件</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box">
+                                <div class="box-body">6
+                                    <canvas id="canvas6"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="box">
+                        <div class="box-body">7
+                            <canvas id="canvas7"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="box">
+                        <div class="box-body">8
+                            <canvas id="canvas8"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box">
+                        <div class="box-body">9
+                            <canvas id="canvas9"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-body">10
+                            <div id="main" style="width: 1900px;height:1200px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-body">10
+                            <div id="main1" style="width: 1900px;height:1200px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-body">10
+                            <div id="main2" style="width: 1900px;height:1200px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'sales/assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'sales/assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'sales/assets/chart/dist/Chart.js' %}"></script>
+    <script type="text/javascript" src="{% static 'sales/assets/chart/dist/utils.js' %}"></script>
+    <script type="text/javascript" src="{% static 'sales/assets/echarts/echarts.js' %}"></script>
+	<style>
+	canvas {
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+	</style>
+
+    <script>
+
+
+        Chart.defaults.global.legend.fullWidth = true;
+        // Horizontal
+		var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+		var color = Chart.helpers.color;
+		var horizontalBarChartData = {
+			labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+			datasets: [{
+				label: 'Dataset 1',
+				backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+				borderColor: window.chartColors.red,
+				borderWidth: 1,
+				data: [
+					500,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+				]
+			}, {
+				label: 'Dataset 2',
+				backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+				borderColor: window.chartColors.blue,
+				data: [
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1100,
+				]
+			}]
+
+		};
+
+
+		// circle
+		var randomScalingFactor = function() {
+			return Math.round(Math.random() * 100);
+		};
+
+		var config = {
+			type: 'doughnut',
+			data: {
+				datasets: [{
+					data: [
+						1000,
+						1000,
+						1000,
+						1000,
+						1000,
+					],
+					backgroundColor: [
+						window.chartColors.red,
+						window.chartColors.orange,
+						window.chartColors.yellow,
+						window.chartColors.green,
+						window.chartColors.blue,
+					],
+					label: 'Dataset 1'
+				},{
+					data: [
+						1000,
+						1000,
+						1000,
+						1000,
+						1000,
+					],
+					backgroundColor: [
+						window.chartColors.red,
+						window.chartColors.orange,
+						window.chartColors.yellow,
+						window.chartColors.green,
+						window.chartColors.blue,
+					],
+					label: 'Dataset 2'
+				}],
+				labels: [
+					'Red',
+					'Orange',
+					'Yellow',
+					'Green',
+					'Blue'
+				]
+			},
+			options: {
+				responsive: true,
+				legend: {
+					position: 'bottom',
+				},
+				title: {
+					display: true,
+					text: 'Chart.js Doughnut Chart'
+				},
+				animation: {
+					animateScale: true,
+					animateRotate: true
+				}
+			}
+		};
+
+
+		// bar-line
+		var chartData = {
+			labels: [
+			    '2020/09',
+			    '2020/10',
+			    '2020/11',
+			    '2020/12',
+			    '2021/01',
+			    '2021/02',
+			    '2021/03',
+            ],
+			datasets: [{
+				type: 'line',
+				label: '予算月平均',
+				borderColor: window.chartColors.blue,
+				borderWidth: 2,
+				fill: false,
+				data: [
+					700000000,
+					600000000,
+					500000000,
+					400000000,
+					500000000,
+					700000000,
+					600000000
+				]
+			}, {
+				type: 'bar',
+				label: 'OG',
+				backgroundColor: window.chartColors.red,
+				data: [
+					700000000,
+					600000000,
+					500000000,
+					400000000,
+					500000000,
+					700000000,
+					600000000
+				],
+				borderWidth: 2
+			}, {
+				type: 'bar',
+				label: 'OS',
+				backgroundColor: window.chartColors.orange,
+				data: [
+					126080500,
+					126080500,
+					126080500,
+					126080500,
+					126080500,
+					126080500,
+					126080500
+				],
+				borderWidth: 2
+			}, {
+				type: 'bar',
+				label: 'OF',
+				backgroundColor: window.chartColors.green,
+				data: [
+					129945000,
+					129945000,
+					129945000,
+					129945000,
+					129945000,
+					129945000,
+					129945000
+				]
+			}, {
+				type: 'bar',
+				label: 'MI',
+				backgroundColor: window.chartColors.purple,
+				data: [
+					129945000,
+					129945000,
+					129945000,
+					129945000,
+					129945000,
+					129945000,
+					129945000
+				]
+			}]
+
+		};
+
+		// 6
+        myArray= "{{ ncolabc | safe}}"
+        myArray2= "{{ ncolabc2 | safe }}"
+        myArray3= "{{ ncolabc3 | safe }}"
+        myArray4= "{{ ncolabc4 | safe }}"
+
+        var myArrayqqq = myArray.replace("[", "").replace("]", "").replaceAll("'", "").split(',')
+        var myArrayqqq2 = myArray2.replace("[", "").replace("]", "").replaceAll("'", "").split(',')
+        var myArrayqqq3 = myArray3.replace("[", "").replace("]", "").replaceAll("'", "").split(',')
+        var myArrayqqq4 = myArray4.replace("[", "").replace("]", "").replaceAll("'", "").split(',')
+
+		var chartData = {
+			labels: myArrayqqq,
+			datasets: [{
+				type: 'bar',
+				label: '予算',
+				backgroundColor: window.chartColors.red,
+				data: myArrayqqq2,
+				{#borderColor: 'white',#}
+				{#borderWidth: 2#}
+			}, {
+				type: 'bar',
+				label: '売上',
+				backgroundColor: window.chartColors.green,
+				data:  myArrayqqq3
+			}, {
+				type: 'bar',
+				label: '注残',
+				backgroundColor: window.chartColors.purple,
+				data:  myArrayqqq4
+			}]
+
+		};
+
+
+
+        // based on prepared DOM, initialize echarts instance
+        var myChart = echarts.init(document.getElementById('main'));
+        // based on prepared DOM, initialize echarts instance
+        var myChart2 = echarts.init(document.getElementById('main1'));
+        // based on prepared DOM, initialize echarts instance
+        var myChart3 = echarts.init(document.getElementById('main2'));
+
+        option = {
+            baseOption: {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross',
+                        crossStyle: {
+                            color: '#999'
+                        }
+                    }
+                },
+                toolbox: {
+                    feature: {
+                        dataView: {show: true, readOnly: false},
+                        magicType: {show: true, type: ['line', 'bar']},
+                        restore: {show: true},
+                        saveAsImage: {show: true}
+                    }
+                },
+                legend: {
+                    data: ['蒸发量', '降水量', '平均温度']
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        data: ['1月1月1月1月1月1月1月1月', '2月1月1月1月1月1月1月1月1月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+                        axisPointer: {
+                            type: 'shadow'
+                        },
+                        axisLabel: {
+                            interval: 0,
+                            rotate:40
+                        }
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value',
+                        name: '水量',
+                        min: 0,
+                        max: 250,
+                        interval: 50,
+                        axisLabel: {
+                            formatter: '{value} ml'
+                        }
+                    },
+                    {
+                        type: 'value',
+                        name: '温度',
+                        min: 0,
+                        max: 25,
+                        interval: 5,
+                        axisLabel: {
+                            formatter: '{value} °C'
+                        }
+                    }
+                ],
+                series: [
+                    {
+                        name: '蒸发量',
+                        type: 'bar',
+                        data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+                    },
+                    {
+                        name: '降水量',
+                        type: 'bar',
+                        data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+                    },
+                    {
+                        name: '平均温度',
+                        type: 'line',
+                        yAxisIndex: 1,
+                        data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+                    }
+                ]
+            },
+            {#media: [#}
+            {#    {#}
+            {#        query: {#}
+            {#            maxAspectRatio: 1           // 当长宽比小于1时。#}
+            {#        },#}
+            {#        option: {#}
+            {#            legend: {                   // legend 放在底部中间。#}
+            {#                right: 'center',#}
+            {#                bottom: 0,#}
+            {#                orient: 'horizontal'    // legend 横向布局。#}
+            {#            },#}
+            {#            series: [                   // 两个饼图左右布局。#}
+            {#                {#}
+            {#                    radius: [20, '50%'],#}
+            {#                    center: ['50%', '30%']#}
+            {#                },#}
+            {#                {#}
+            {#                    radius: [30, '50%'],#}
+            {#                    center: ['50%', '70%']#}
+            {#                }#}
+            {#            ]#}
+            {#        }#}
+            {#    },#}
+            {#    {#}
+            {#        query: {#}
+            {#            maxWidth: 500               // 当容器宽度小于 500 时。#}
+            {#        },#}
+            {#        option: {#}
+            {#            legend: {#}
+            {#                right: 10,              // legend 放置在右侧中间。#}
+            {#                top: '15%',#}
+            {#                orient: 'vertical'      // 纵向布局。#}
+            {#            },#}
+            {#            series: [                   // 两个饼图上下布局。#}
+            {#                {#}
+            {#                    radius: [20, '50%'],#}
+            {#                    center: ['50%', '30%']#}
+            {#                },#}
+            {#                {#}
+            {#                    radius: [30, '50%'],#}
+            {#                    center: ['50%', '75%']#}
+            {#                }#}
+            {#            ]#}
+            {#        }#}
+            {#    },#}
+            {#]#}
+        };
+        option2 = {
+            title: {
+                text: '世界人口总量',
+                subtext: '数据来自网络'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend: {
+                data: ['2011年', '2012年']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'value',
+                boundaryGap: [0, 0.01]
+            },
+            yAxis: {
+                type: 'category',
+                data: ['巴西', '印尼', '美国', '印度', '中国', '世界人口(万)']
+            },
+            series: [
+                {
+                    name: '2011年',
+                    type: 'bar',
+                    data: [18203, 23489, 29034, 104970, 131744, 630230]
+                },
+                {
+                    name: '2012年',
+                    type: 'bar',
+                    data: [19325, 23438, 31000, 121594, 134141, 681807]
+                }
+            ]
+        };
+        option3 = {
+            title: {
+                text: '世界人口总量',
+                subtext: '数据来自网络'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend: {
+                data: ['2011年', '2012年']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'value',
+                boundaryGap: [0, 0.01]
+            },
+            yAxis: {
+                type: 'category',
+                data: ['巴西', '印尼', '美国', '印度', '中国', '世界人口(万)']
+            },
+            series: [
+                {
+                    name: '2011年',
+                    type: 'bar',
+                    data: [18203, 23489, 29034, 104970, 131744, 630230]
+                },
+                {
+                    name: '2012年',
+                    type: 'bar',
+                    data: [19325, 23438, 31000, 121594, 134141, 681807]
+                }
+            ]
+        };
+
+
+        // use configuration item and data specified to show chart
+        myChart.setOption(option);
+        // use configuration item and data specified to show chart
+        myChart2.setOption(option2);
+        // use configuration item and data specified to show chart
+        myChart3.setOption(option3);
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		window.onload = function() {
+		    Chart.defaults.global.defaultFontColor = '#000000';
+			var ctx1 = document.getElementById('canvas1').getContext('2d');
+			var ctx2 = document.getElementById('canvas2').getContext('2d');
+			var ctx3 = document.getElementById('canvas3').getContext('2d');
+			var ctx4 = document.getElementById('canvas4').getContext('2d');
+			var ctx6 = document.getElementById('canvas6').getContext('2d');
+			var ctx7 = document.getElementById('canvas7').getContext('2d');
+			var ctx8 = document.getElementById('canvas8').getContext('2d');
+			var ctx9 = document.getElementById('canvas9').getContext('2d');
+			window.myHorizontalBar = new Chart(ctx1, {
+				type: 'horizontalBar',
+				data: horizontalBarChartData,
+				options: {
+					// Elements options apply to all of the options unless overridden in a dataset
+					// In this case, we are setting the border of each horizontal bar to be 2px wide
+					elements: {
+						rectangle: {
+							borderWidth: 2,
+						}
+					},
+					responsive: true,
+					legend: {
+						position: 'top',
+                        fullWidth:true
+					},
+					title: {
+						display: true,
+						text: 'Chart.js Horizontal Bar Chart'
+					},
+                    scales: {
+                         xAxes: [{
+                             ticks: {
+                                 beginAtZero: true
+                             }
+                         }],
+                         yAxes: [{
+                             ticks: {
+                                 {#mirror: true // 只需将 mirror 设为 true 即可达到想要的效果#}
+                             }
+                         }]
+                    }
+				}
+			});
+			window.myDoughnut = new Chart(ctx2, config);
+			window.myHorizontalBar = new Chart(ctx3, {
+				type: 'horizontalBar',
+				data: horizontalBarChartData,
+				options: {
+					// Elements options apply to all of the options unless overridden in a dataset
+					// In this case, we are setting the border of each horizontal bar to be 2px wide
+					elements: {
+						rectangle: {
+							borderWidth: 2,
+						}
+					},
+					responsive: true,
+					legend: {
+						position: 'top',
+					},
+					title: {
+						display: true,
+						text: 'Chart.js Horizontal Bar Chart'
+					}
+				}
+			});
+			window.myDoughnut = new Chart(ctx4, config);
+			window.myMixedChart = new Chart(ctx6, {
+				type: 'bar',
+				data: chartData,
+				options: {
+					responsive: true,
+					title: {
+						display: true,
+						text: '69期予算　売上　受注状況',
+                        fontSize: 20
+					},
+					tooltips: {
+						mode: 'index',
+						intersect: true
+					}
+				}
+			});
+			window.myMixedChart = new Chart(ctx7, {
+				type: 'bar',
+				data: chartData,
+				options: {
+					responsive: true,
+					title: {
+						display: true,
+						text: '売上実績(注残)月別',
+                        fontSize: 20
+					},
+					tooltips: {
+						mode: 'index',
+						intersect: true
+					},
+					scales: {
+						xAxes: [{
+							stacked: true,
+						}],
+						yAxes: [{
+							stacked: true,
+                            position: 'left'
+						},{
+							stacked: true,
+                            position: 'right'
+						}]
+					}
+				}
+			});
+			window.myDoughnut = new Chart(ctx8, config);
+			window.myDoughnut = new Chart(ctx9, config);
+		};
+	</script>
+</body>
+
+</html>

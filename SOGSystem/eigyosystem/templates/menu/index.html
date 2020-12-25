@@ -1,0 +1,97 @@
+{% load i18n static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+
+    <title>{{ indexes.system_name }}</title>
+    <link rel="icon" href="{% static 'images/logo.svg' %}">
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Features-Blue.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Footer-Dark.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+</head>
+
+<body>
+    <div class="features-blue" style="padding-bottom: 10rem">
+        <div class="container-fluid">
+            <div class="intro" style="margin-bottom: 0rem;height: 7%;">
+                <h1 class="display-4 text-center" style="margin: 0% 0% 0% 0%;margin-bottom: 2rem;padding: 3% 0% 0% 0%;font-size: 3.5rem;color:black;">{{ indexes.title }}</h1>
+            </div>
+            <ul class="nav nav-tabs" style="color:black;margin: 0% 0% 3% 0%;height: 3%;">
+                {% for key, value in indexes.nav.items %}
+                    {% if forloop.last %}
+                        <li class="nav-item"><a class="nav-link active" style="color:black;background-color:#007bff;border-color:#ffffff" href="{% url key %}">{{ value }}</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link active" style="color:black;background-color:#007bff;border-color:#ffffff" href="{% url key %}">{{ value }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <div class="row features">
+                <div class="col-sm-6 col-md-4 col-xl-6 offset-xl-0 text-center item" style="width: 50%;max-width: 50%;margin: 0% 0% 0% 0%;padding: 0rem 0rem 0rem 0rem;height: 20%;">
+                    <a class="btn btn-primary btn-lg" role="button" style="color:black;width: 90%;height: 4.5rem;margin: 0rem 0rem 0rem 0rem;padding: 1rem 0rem 0rem 0rem;" href="{% url 'eigyosystem:yosan' %}">
+                        予算管理
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-4 col-xl-6 offset-xl-0 text-center item" style="width: 50%;max-width: 50%;margin: 0% 0% 0% 0%;padding: 0rem 0rem 0rem 0rem;height: 20%;">
+                    <a class="btn btn-primary btn-lg" role="button" style="color:black;width: 90%;height: 4.5rem;margin: 0rem 0rem 0rem 0rem;padding: 1rem 0rem 0rem 0rem;" href="{% url 'eigyosystem:uriage' %}">
+                        売上管理
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-4 col-xl-6 offset-xl-0 text-center item" style="width: 50%;max-width: 50%;margin: 0% 0% 0% 0%;padding: 0rem 0rem 0rem 0rem;height: 20%;">
+                    <a class="btn btn-primary btn-lg" role="button" style="color:black;width: 90%;height: 4.5rem;margin: 0rem 0rem 0rem 0rem;padding: 1rem 0rem 0rem 0rem;" href="#">
+                        受注管理（開発中）
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-4 col-xl-6 offset-xl-0 text-center item" style="width: 50%;max-width: 50%;margin: 0% 0% 0% 0%;padding: 0rem 0rem 0rem 0rem;height: 20%;">
+                    <a class="btn btn-primary btn-lg" role="button" style="color:black;width: 90%;height: 4.5rem;margin: 0rem 0rem 0rem 0rem;padding: 1rem 0rem 0rem 0rem;" href="#">
+                        出荷管理（開発中）
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-4 col-xl-6 offset-xl-0 text-center item" style="width: 50%;max-width: 50%;margin: 0% 0% 0% 0%;padding: 0rem 0rem 0rem 0rem;height: 20%;">
+                    <a class="btn btn-primary btn-lg" role="button" style="color:black;width: 90%;height: 4.5rem;margin: 0rem 0rem 0rem 0rem;padding: 1rem 0rem 0rem 0rem;" href="#">
+                        入金管理（開発中）
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-4 col-xl-6 offset-xl-0 text-center item" style="width: 50%;max-width: 50%;margin: 0% 0% 0% 0%;padding: 0rem 0rem 0rem 0rem;height: 20%;">
+                    <a class="btn btn-primary btn-lg" role="button" style="color:black;width: 90%;height: 4.5rem;margin: 0rem 0rem 0rem 0rem;padding: 1rem 0rem 0rem 0rem;" href="#">
+                        顧客管理（開発中）
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-4 col-xl-6 offset-xl-0 text-center item" style="width: 50%;max-width: 50%;margin: 0% 0% 0% 0%;padding: 0rem 0rem 0rem 0rem;height: 20%;">
+                    <a class="btn btn-primary btn-lg" role="button" style="color:black;width: 90%;height: 4.5rem;margin: 0rem 0rem 0rem 0rem;padding: 1rem 0rem 0rem 0rem;" href="#">
+                        見積管理（開発中）
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-4 col-xl-6 offset-xl-0 text-center item" style="width: 50%;max-width: 50%;margin: 0% 0% 0% 0%;padding: 0rem 0rem 0rem 0rem;height: 20%;">
+                    <a class="btn btn-primary btn-lg" role="button" style="color:black;width: 90%;height: 4.5rem;margin: 0rem 0rem 0rem 0rem;padding: 1rem 0rem 0rem 0rem;" href="#">
+                        案件管理（開発中）
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-dark">
+        <footer>
+            <div class="container">
+                <div class="row" style="height: 103px;">
+                    <div class="col-sm-6 col-md-3 item" style="height: 103px;">
+                        <img src="{% static 'images/logo.svg' %}" >
+                    </div>
+                    <div class="col-md-6 col-xl-8 offset-xl-1 item text">
+                        <h3>株式会社　住田光学ガラス<br></h3>
+                        <p>〒330-8565 埼玉県さいたま市浦和区針ヶ谷4-7-25<br>TEL：<a href="tel:0488323165">048-832-3165</a>　</p>
+                        <p>E-MAIL :&nbsp;<a href="mailto:contact-sumita@sumita-opt.co.jp">contact-sumita@sumita-opt.co.jp</a><br></p>
+                    </div>
+                </div>
+                <p class="text-right text-sm-right text-md-right text-lg-right text-xl-right copyright">© 1996 SUMITA OPTICAL GLASS, Inc.<br></p>
+            </div>
+        </footer>
+    </div>
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+</body>
+
+</html>

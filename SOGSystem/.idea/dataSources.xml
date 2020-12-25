@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="sogtestdb" uuid="50809e9b-dbf2-4fde-a602-640aa82c2f9d">
+      <driver-ref>java.sql.Driver</driver-ref>
+      <synchronize>true</synchronize>
+      <configured-by-url>true</configured-by-url>
+      <jdbc-driver>org.firebirdsql.jdbc.FBDriver</jdbc-driver>
+      <jdbc-url>jdbc:firebirdsql:localhost:C:\data\SOGTESTDB.FDB</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="sogdb" uuid="7e904eeb-a23b-4852-ac30-574f52ef74b7">
+      <driver-ref>java.sql.Driver</driver-ref>
+      <synchronize>true</synchronize>
+      <configured-by-url>true</configured-by-url>
+      <jdbc-driver>org.firebirdsql.jdbc.FBDriver</jdbc-driver>
+      <jdbc-url>jdbc:firebirdsql:localhost:C:\data\SOGDB.FDB</jdbc-url>
+    </data-source>
+  </component>
+</project>

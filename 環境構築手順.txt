@@ -1,0 +1,136 @@
+Microsoft Windows [Version 10.0.18363.1256]
+(c) 2019 Microsoft Corporation. All rights reserved.
+
+C:\Users\db2adminyang>cd ..
+
+C:\Users>cd ..
+
+C:\>cd PyCharmProject
+
+C:\PyCharmProject>virtualenv SOGEnv
+created virtual environment CPython3.8.0.final.0-64 in 766ms
+  creator CPython3Windows(dest=C:\PyCharmProject\SOGEnv, clear=False, global=False)
+  seeder FromAppData(download=False, pip=bundle, setuptools=bundle, wheel=bundle, via=copy, app_data_dir=C:\Users\db2adminyang\AppData\Local\pypa\virtualenv)
+    added seed packages: pip==20.2.4, setuptools==50.3.2, wheel==0.35.1
+  activators BashActivator,BatchActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator
+
+C:\PyCharmProject>
+C:\PyCharmProject>
+C:\PyCharmProject>
+C:\PyCharmProject>cd SOGEnv
+
+C:\PyCharmProject\SOGEnv>Scripts\activate
+
+(SOGEnv) C:\PyCharmProject\SOGEnv>
+(SOGEnv) C:\PyCharmProject\SOGEnv>
+(SOGEnv) C:\PyCharmProject\SOGEnv>pip install django==2.2
+Collecting django==2.2
+  Using cached Django-2.2-py3-none-any.whl (7.4 MB)
+Collecting sqlparse
+  Using cached sqlparse-0.4.1-py3-none-any.whl (42 kB)
+Collecting pytz
+  Using cached pytz-2020.4-py2.py3-none-any.whl (509 kB)
+Installing collected packages: sqlparse, pytz, django
+Successfully installed django-2.2 pytz-2020.4 sqlparse-0.4.1
+WARNING: You are using pip version 20.2.4; however, version 20.3.3 is available.
+You should consider upgrading via the 'C:\PyCharmProject\SOGEnv\Scripts\python.exe -m pip install --upgrade pip' command.
+
+(SOGEnv) C:\PyCharmProject\SOGEnv>
+(SOGEnv) C:\PyCharmProject\SOGEnv>
+(SOGEnv) C:\PyCharmProject\SOGEnv>
+(SOGEnv) C:\PyCharmProject\SOGEnv>pip install pyodbc==4.0.30
+Collecting pyodbc==4.0.30
+  Using cached pyodbc-4.0.30-cp38-cp38-win_amd64.whl (68 kB)
+Installing collected packages: pyodbc
+Successfully installed pyodbc-4.0.30
+WARNING: You are using pip version 20.2.4; however, version 20.3.3 is available.
+You should consider upgrading via the 'C:\PyCharmProject\SOGEnv\Scripts\python.exe -m pip install --upgrade pip' command.
+
+(SOGEnv) C:\PyCharmProject\SOGEnv>
+(SOGEnv) C:\PyCharmProject\SOGEnv>
+(SOGEnv) C:\PyCharmProject\SOGEnv>
+(SOGEnv) C:\PyCharmProject\SOGEnv>pip install xlrd==1.2.0
+Collecting xlrd==1.2.0
+  Using cached xlrd-1.2.0-py2.py3-none-any.whl (103 kB)
+Installing collected packages: xlrd
+Successfully installed xlrd-1.2.0
+WARNING: You are using pip version 20.2.4; however, version 20.3.3 is available.
+You should consider upgrading via the 'C:\PyCharmProject\SOGEnv\Scripts\python.exe -m pip install --upgrade pip' command.
+
+(SOGEnv) C:\PyCharmProject\SOGEnv>
+(SOGEnv) C:\PyCharmProject\SOGEnv>
+(SOGEnv) C:\PyCharmProject\SOGEnv>pip install django-bootstrap4==2.3.1
+Collecting django-bootstrap4==2.3.1
+  Using cached django_bootstrap4-2.3.1-py3-none-any.whl (24 kB)
+Collecting beautifulsoup4<5.0.0,>=4.8.0
+  Using cached beautifulsoup4-4.9.3-py3-none-any.whl (115 kB)
+Requirement already satisfied: django<4.0,>=2.2 in c:\pycharmproject\sogenv\lib\site-packages (from django-bootstrap4==2.3.1) (2.2)
+Collecting soupsieve>1.2; python_version >= "3.0"
+  Using cached soupsieve-2.1-py3-none-any.whl (32 kB)
+Requirement already satisfied: pytz in c:\pycharmproject\sogenv\lib\site-packages (from django<4.0,>=2.2->django-bootstrap4==2.3.1) (2020.4)
+Requirement already satisfied: sqlparse in c:\pycharmproject\sogenv\lib\site-packages (from django<4.0,>=2.2->django-bootstrap4==2.3.1) (0.4.1)
+Installing collected packages: soupsieve, beautifulsoup4, django-bootstrap4
+Successfully installed beautifulsoup4-4.9.3 django-bootstrap4-2.3.1 soupsieve-2.1
+WARNING: You are using pip version 20.2.4; however, version 20.3.3 is available.
+You should consider upgrading via the 'C:\PyCharmProject\SOGEnv\Scripts\python.exe -m pip install --upgrade pip' command.
+
+(SOGEnv) C:\PyCharmProject\SOGEnv>
+(SOGEnv) C:\PyCharmProject\SOGEnv>
+(SOGEnv) C:\PyCharmProject\SOGEnv>
+(SOGEnv) C:\PyCharmProject\SOGEnv>pip install fdb==2.0.1
+Collecting fdb==2.0.1
+  Using cached fdb-2.0.1-py2.py3-none-any.whl (160 kB)
+Processing c:\users\db2adminyang\appdata\local\pip\cache\wheels\8e\70\28\3d6ccd6e315f65f245da085482a2e1c7d14b90b30f239e2cf4\future-0.18.2-py3-none-any.whl
+Installing collected packages: future, fdb
+Successfully installed fdb-2.0.1 future-0.18.2
+WARNING: You are using pip version 20.2.4; however, version 20.3.3 is available.
+You should consider upgrading via the 'C:\PyCharmProject\SOGEnv\Scripts\python.exe -m pip install --upgrade pip' command.
+
+(SOGEnv) C:\PyCharmProject\SOGEnv>
+(SOGEnv) C:\PyCharmProject\SOGEnv>
+(SOGEnv) C:\PyCharmProject\SOGEnv>
+(SOGEnv) C:\PyCharmProject\SOGEnv>pip install django-firebird==2.2a1
+Collecting django-firebird==2.2a1
+  Using cached django_firebird-2.2a1-py2.py3-none-any.whl (35 kB)
+Installing collected packages: django-firebird
+Successfully installed django-firebird-2.2a1
+WARNING: You are using pip version 20.2.4; however, version 20.3.3 is available.
+You should consider upgrading via the 'C:\PyCharmProject\SOGEnv\Scripts\python.exe -m pip install --upgrade pip' command.
+
+(SOGEnv) C:\PyCharmProject\SOGEnv>
+(SOGEnv) C:\PyCharmProject\SOGEnv>
+(SOGEnv) C:\PyCharmProject\SOGEnv>pip freeze -l
+beautifulsoup4==4.9.3
+Django==2.2
+django-bootstrap4==2.3.1
+django-firebird==2.2a1
+fdb==2.0.1
+future==0.18.2
+pyodbc==4.0.30
+pytz==2020.4
+soupsieve==2.1
+sqlparse==0.4.1
+xlrd==1.2.0
+
+(SOGEnv) C:\PyCharmProject\SOGEnv>
+(SOGEnv) C:\PyCharmProject\SOGEnv>
+(SOGEnv) C:\PyCharmProject\SOGEnv>cd ..
+
+(SOGEnv) C:\PyCharmProject>
+(SOGEnv) C:\PyCharmProject>
+(SOGEnv) C:\PyCharmProject>
+(SOGEnv) C:\PyCharmProject>
+(SOGEnv) C:\PyCharmProject>
+(SOGEnv) C:\PyCharmProject>django-admin startproject SOGSystem
+
+(SOGEnv) C:\PyCharmProject>
+(SOGEnv) C:\PyCharmProject>
+(SOGEnv) C:\PyCharmProject>cd SOGSystem
+
+(SOGEnv) C:\PyCharmProject\SOGSystem>python manage.py startapp eigyosystem
+
+(SOGEnv) C:\PyCharmProject\SOGSystem>
+(SOGEnv) C:\PyCharmProject\SOGSystem>
+(SOGEnv) C:\PyCharmProject\SOGSystem>
+(SOGEnv) C:\PyCharmProject\SOGSystem>
+(SOGEnv) C:\PyCharmProject\SOGSystem>
